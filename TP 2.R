@@ -1,6 +1,6 @@
 # EXERCICE 1
 #1
-df=read.csv("L:/BUT/SD/Promo 2023/ythollet/R/data frame/fao.csv",header=TRUE,dec=",",sep=";")
+df=read.csv("C:/Users/Utilisateur/Downloads/fao.csv",header=TRUE,dec=",",sep=";")
 
 #2
 nrow(df)
@@ -61,6 +61,23 @@ a=subset(df,Dispo_alim>3500 & Import_viande>1000)
 a["Nom"]
 
 #7
-a=subset(df,Nom %in% c("France","Belgique"))
+subset(df,Nom %in% c("France","Belgique"))
 
 
+# EXERCICE 4
+
+#1
+df$part_export=df$Export_viande/df$Prod_viande
+
+#2
+df$dispo_alim_pays=df$Dispo_alim*df$Population
+
+#3
+write.table(df,"ExportTp2.csv",";")
+write.table(df, "C:/Users/Utilisateur/Downloads/ExportTp2.csv",sep=";", row.names = FALSE)
+
+#4
+sum(sum(df$Dispo_alim,na.rm=TRUE)*df$Population,na.rm=TRUE)
+
+#5
+sum(sum(df$Dispo_alim,na.rm=TRUE)*df$Population,na.rm=TRUE)/2300
