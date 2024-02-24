@@ -81,3 +81,23 @@ sum(sum(df$Dispo_alim,na.rm=TRUE)*df$Population,na.rm=TRUE)
 
 #5
 sum(sum(df$Dispo_alim,na.rm=TRUE)*df$Population,na.rm=TRUE)/2300
+
+# EXERCICE 5
+
+#1
+plot(df$Prod_viande,df$Export_viande)
+
+#2
+cor(df$Prod_viande,df$Export_viande,use = "complete.obs")
+
+#3
+matrice=round(cor(df[-1,-1],use = "complete.obs"),2)
+View(matrice)
+
+#4
+install.packages("corrplot")
+
+#5
+library(corrplot)
+matrice=round(cor(df[-1,-1],use = "complete.obs"),2)
+corrplot(matrice)
