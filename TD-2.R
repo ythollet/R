@@ -1,6 +1,7 @@
+
 #EXERCICE 1
 
-setwd("L:/BUT/SD/Promo 2023/ythollet/R/data frame")
+setwd("C:/Users/Utilisateur/Downloads")
 getwd()
 
 bodies_karts = read.csv(file = "bodies_karts.csv", header = TRUE, sep = ";", dec = ",")
@@ -102,4 +103,57 @@ View(resultat)
 
 #4
 resultat=drivers[,-c("Weight","Acceleration")]
+View(resultat)
+
+#5
+resultat=drivers[,c("Driver","Acceleration","Weight")]
+View(resultat)
+
+#6
+resultat=drivers[c(3,12,32),]
+View(resultat)
+
+#7
+resultat=drivers[c(32,3,12),]
+View(resultat)
+
+#8
+rang=order(drivers$Weight)
+resultat=drivers[rang,c("Driver","Weight")]
+View(resultat)
+
+#9
+rang=order(drivers$Acceleration,decreasing = TRUE)
+resultat=drivers[rang,c("Driver","Acceleration")]
+View(resultat)
+
+#10
+rang=order(drivers$Acceleration,drivers$Weight,decreasing = c(TRUE,FALSE))
+resultat=drivers[rang,c("Driver","Weight","Acceleration")]
+View(resultat)
+
+
+# EXERCICE 4
+
+#1
+topDriver=subset(drivers,Acceleration==max(Acceleration))
+topDriver[,c("Driver","Acceleration")]
+
+#2
+topDriver=subset(drivers,Acceleration==max(Acceleration))
+topDriver[,c("Driver","Acceleration")]
+
+topGlider=subset(gliders,Acceleration==max(Acceleration))
+topGlider[,c("Glider","Acceleration")]
+
+topTire=subset(tires,Acceleration==max(Acceleration))
+topTire[,c("Tire","Acceleration")]
+
+topBody=subset(bodies_karts,Acceleration==max(Acceleration))
+topBody[,c("Body","Acceleration")]
+
+
+
+
+
 
