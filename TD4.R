@@ -90,3 +90,79 @@ print(means)
 points(means,pch=15,col="red")
 
 #Exercice 4 - Le diagramme
+
+#Les fonctions barplot() et table().
+#1
+effectif=table(df$bonus)
+barplot(height=effectif,main = "répartition station bonus")
+
+#2
+effectif=table(df$bonus)
+barplot(height=effectif,main = "répartition station bonus",horiz = TRUE)
+
+#Les fonctions barplot() ,prop.table() et legend().
+
+#3
+frequence=prop.table(table(df$bonus))
+barplot(height = frequence,main="proportion station bonus",horiz=TRUE)
+
+#4
+effectif=table(df$banking, df$bonus)
+barplot(height = effectif,main="bonus and banking",xlab="station bonus")
+
+#5
+#Calcul des pourcentages
+frequence = prop.table(x = effectif)
+barplot(height = frequence,
+        main = "Bonus vs Banking",
+        xlab = "Station Bonus ?",
+        col = c("red","green"))
+
+#Préparer les labels
+legend_labels <- colnames(frequence)
+#Ajouter une légende
+legend(x = "topright", 
+       legend = legend_labels, 
+       fill  = c("red","green"))
+
+#Afficher les fréquences pour vérifier le graphique
+print(frequence)
+
+#6
+
+#Calcul des pourcentages colonnes
+frequence = prop.table(x = effectif, margin = 2)
+barplot(height = frequence,
+        main = "Bonus vs Banking",
+        xlab = "Station Bonus ?",
+        col = c("red","green"))
+
+#Préparer les labels
+legend_labels <- colnames(frequence)
+#Ajouter une légende
+legend(x = "topright", 
+       legend = legend_labels, 
+       fill  = c("red","green"))
+
+#Afficher les fréquences pour vérifier le graphique
+print(frequence)
+
+#7
+
+#Calcul des pourcentages colonnes
+frequence = prop.table(x = effectif, margin = 2)
+barplot(height = frequence,
+        main = "Bonus vs Banking",
+        xlab = "Station Bonus ?",
+        col = c("red","green"),
+        beside = TRUE)
+
+#Préparer les labels
+legend_labels <- colnames(frequence)
+#Ajouter une légende
+legend(x = "topright", 
+       legend = legend_labels, 
+       fill  = c("red","green"))
+
+#Afficher les fréquences pour vérifier le graphique
+print(frequence)
