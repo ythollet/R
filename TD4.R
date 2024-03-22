@@ -103,12 +103,18 @@ barplot(height=effectif,main = "répartition station bonus",horiz = TRUE)
 #Les fonctions barplot() ,prop.table() et legend().
 
 #3
-frequence=prop.table(table(df$bonus))
-barplot(height = frequence,main="proportion station bonus",horiz=TRUE)
+frequence = prop.table(effectif)
+barplot(height = frequence,
+        main = "Répartition en % du nombre \n de station bonus",
+        horiz = TRUE)
 
 #4
-effectif=table(df$banking, df$bonus)
-barplot(height = effectif,main="bonus and banking",xlab="station bonus")
+effectif = table(df$banking, df$bonus)
+print(effectif)
+barplot(height = effectif,
+        main = "Bonus vs Banking",
+        xlab = "Station Bonus ?")
+#On remarque qu'on ne sait pas distinguer les deux modalités car il n'y a pas de légende.
 
 #5
 #Calcul des pourcentages
@@ -166,3 +172,64 @@ legend(x = "topright",
 
 #Afficher les fréquences pour vérifier le graphique
 print(frequence)
+
+#8
+pie(x = effectif,
+    main = "Répartition du nombre \n de station bonus",
+    col = c("yellow","green"))
+
+#9
+etiquette = paste(rownames(effectif),"\n",effectif)
+pie(x = effectif,
+    main = "Répartition du nombre \n de station bonus",
+    col = c("yellow","green"),
+    labels = etiquette)
+
+#10
+effectif=table(df$CodePostal)
+tri=sort(x=effectif,decreasing = TRUE)
+top10=tri[1:10]
+barplot(height = top10,las=2,col=palette())
+
+#11
+effectif=table(df$CodePostal)
+tri=sort(x=effectif,decreasing = TRUE)
+top10=tri[1:10]
+barplot(height = top10,las=2,col=colors())
+
+#12
+dev.print(device = png,file="graph.png",width=600)
+
+
+
+# Exercice 5 - Nuage de points
+
+#La fonction plot().
+
+#1
+plot(x = df$stands, y = df$capacity)
+
+#2
+plot(x=df$stands,y=df$capacity,xlim=c(0,60),ylim=c(0,60))
+
+#3
+df$bornes=as.factor(df$bornes)
+plot(x=df$stands,y=df$capacity,xlim=c(0,60),ylim=c(0,60),col=df$bornes,pch=19)
+legend(x="topright",legend = levels(df$bornes),col=palette(),pch=19)
+
+#4
+mycolors = c("red", "blue", "green")  
+df$bornes=as.factor(df$bornes)
+plot(x=df$stands,y=df$capacity,xlim=c(0,60),ylim=c(0,60),col=mycolors[df$bornes],pch=19)
+legend(x="topright",legend = levels(df$bornes),col=mycolors,pch=19)
+
+#5
+moy_stands=mean(df$stands)
+moy_capacity=mean(df$capacity)
+points(x=moy_stands,y=moy_capacity,pch=15,cex = 2,col="green")
+
+
+
+
+
+
