@@ -1,227 +1,232 @@
+#Exercice 1 - Importer les données
 #1
-salaire_net_cadre=function(salaire_brut)
-        {salaire_net_avant_impot=salaire_brut*0.75
-          return (salaire_net_avant_impot)}
-
-salaire_net_cadre(salaire_brut = 3000)
+df=read.csv("velov.csv",header=TRUE,dec=",",sep=";")
 
 #2
-salaire_net_cadre=function(salaire_brut=2500)
-{salaire_net_avant_impot=salaire_brut*0.75
-return (salaire_net_avant_impot)}
-
-salaire_net_cadre(salaire_brut = 3000)
+summary(df)
+class(df$status)
+class(df$CodePostal)
 
 #3
-salaire_net_cadre=function(salaire_brut=2500,temps_de_travail=1)
-{salaire_net_avant_impot=salaire_brut*temps_de_travail
-return (salaire_net_avant_impot)}
-
-#Test de la fonction
-salaire_net_cadre(salaire_brut = 3000,
-                  temps_de_travail = 0.8)
-
-
-
-
-# La commande if() {}
+df$status=as.factor(df$status)
+df$CodePostal=as.factor(df$CodePostal)
+class(df$status)
+class(df$CodePostal)
 
 #4
-salaire_net_cadre=function(salaire_brut=2500,temps_de_travail=1){
-                  if(!is.numeric(salaire_brut)){
-                    return("Erreur :  le salaire brut doit être une valeur numérique")
-                    
-                  }
-                  salaire_net_avant_impot=salaire_brut*temps_de_travail
-                  return (salaire_net_avant_impot)}
-#Test de la fonction
-salaire_net_cadre(salaire_brut = "2000€")
-salaire_net_cadre(salaire_brut = 2000)
+df$bornes=ifelse(df$capacity==(df$bikes+df$stands),"OK","KO")
+View(df)
 
 
+#Exercice 2 - L'histogramme
 
-#5
-salaire_net_cadre=function(salaire_brut=2500,temps_de_travail=1){
-  if(!is.numeric(salaire_brut)){
-    return("Erreur :  le salaire brut doit être une valeur numérique")}
-  
-  if(!is.numeric(temps_de_travail) & temps_de_travail<0 & temps_de_travail>1){
-    return("Erreur :  le temps de travail doit être une valeur numérique comprise entre 0 et 1")}
-  
-  salaire_net_avant_impot=salaire_brut*temps_de_travail
-  return (salaire_net_avant_impot)}
-
-#Test de la fonction
-salaire_net_cadre(salaire_brut = 2000, temps_de_travail = "100%")
-salaire_net_cadre(salaire_brut = 2000, temps_de_travail = 0.8)
-salaire_net_cadre(salaire_brut = 2000, temps_de_travail = 100)
-
-
-#6
-salaire_net=function(salaire_brut=2500,temps_de_travail=1,statut){
-  if(!is.numeric(salaire_brut)){
-    return("Erreur :  le salaire brut doit être une valeur numérique")}
-  
-  if(!is.numeric(temps_de_travail) & temps_de_travail<0 & temps_de_travail>1){
-    return("Erreur :  le temps de travail doit être une valeur numérique comprise entre 0 et 1")}
-  
-  if(!statut %in% c("cadre","non cadre")){
-    return("erreur argument statut")
-  }
-  
-  if(statut=="cadre"){
-    salaire_net_avant_impot=salaire_brut*temps_de_travail*0.75
-  }
-  
-  else{
-    salaire_net_avant_impot=salaire_brut*temps_de_travail*0.78
-  }
-  
-  
-  return (salaire_net_avant_impot)}
-
-#Test de la fonction
-salaire_net(salaire_brut = 2000, statut = "cadre")
-salaire_net(salaire_brut = 2000, statut = "non cadre")
-salaire_net(salaire_brut = 2000, statut = "technicien")
-
-
-
-#La commande else if() {}
-
-#7
-salaire_net=function(salaire_brut=2500,temps_de_travail=1,statut){
-  if(!is.numeric(salaire_brut)){
-    return("Erreur :  le salaire brut doit être une valeur numérique")}
-  
-  if(!is.numeric(temps_de_travail) & temps_de_travail<0 & temps_de_travail>1){
-    return("Erreur :  le temps de travail doit être une valeur numérique comprise entre 0 et 1")}
-  
-  if(!statut %in% c("cadre","non cadre")){
-    return("erreur argument statut")
-  }
-  
-  if(statut=="cadre"){
-    salaire_net_avant_impot=salaire_brut*temps_de_travail*0.75
-  }
-  
-  else{
-    salaire_net_avant_impot=salaire_brut*temps_de_travail*0.78
-  }
-  
-  if(salaire_net_avant_impot<=1591){
-    taux=0}
-  if(salaire_net_avant_impot<=2006){
-    taux=0.029}
-  if(salaire_net_avant_impot<=3476){
-    taux=0.099}
-  if(salaire_net_avant_impot<=8557){
-    taux=0.20}
-  if(salaire_net_avant_impot>=8857){
-    taux=0.43}
-  
-  salaire_net_apres_impot=salaire_net_avant_impot*(1-taux)
-  
-  return (salaire_net_apres_impot)}
-
-#7 BIS
-salaire_net = function(salaire_brut = 2500,temps_travail = 1, statut) {
-  
-  if (!is.numeric(salaire_brut)) {
-    return("Erreur :  le salaire brut doit être une valeur numérique")
-  }
-  
-  if (is.numeric(temps_travail) & (temps_travail >= 0) & (temps_travail <= 1)) {
-    return("Erreur :  le temps de travail doit être une valeur numérique entre 0 et 1")
-  }
-  
-  if (!statut %in% c("cadre","non cadre")) {
-    return("Erreur :  le statut doit être cadre ou non cadre")
-  }
-  
-  if (statut == "cadre") {
-    salaire_net_avant_impot = salaire_brut * temps_travail * 0.75
-  } else {
-    salaire_net_avant_impot = salaire_brut * temps_travail * 0.78
-  }
-  
-  if (salaire_net_avant_impot <= 1591) {
-    salaire_net_apres_impot <- salaire_net_avant_impot
-  } else if (salaire_net_avant_impot <= 2006) {
-    salaire_net_apres_impot <- salaire_net_avant_impot * (1 - 0.029)
-  } else if (salaire_net_avant_impot <= 3476) {
-    salaire_net_apres_impot <- salaire_net_avant_impot * (1 - 0.099)
-  } else if (salaire_net_avant_impot <= 8557) {
-    salaire_net_apres_impot <- salaire_net_avant_impot * (1 - 0.20)
-  } else {
-    salaire_net_apres_impot <- salaire_net_avant_impot * (1 - 0.43)
-  }
-  
-  return(salaire_net_apres_impot) 
-  
-  
-#8
-shifumi=function(){
-  # Demander à l'utilisateur de saisir une valeur
-  choix_utilisateur=readline(prompt = "Choisissez entre pierre, papier ou ciseaux : ")
-  
-  # Vérifier si l'utilisateur a saisi une valeur valide
-  if(choix_utilisateur %in% c("pierre","papier","ciseaux")){
-    # Simuler un choix aléatoire pour l'ordinateur
-    choix_ordi=sample(c("pierre","papier","ciseaux"),1)
-    
-    # Afficher les choix de l'utilisateur et de l'ordinateur
-    cat("Votre choix:",choix_utilisateur,"\n")
-    cat("choix ordi:",choix_ordi,"\n")
-    
-    # Retourner le résultat du jeu
-    if (choix_utilisateur==choix_ordi){
-      return("Egalité")}
-    
-    else if((choix_utilisateur=="pierre" & choix_ordi=="ciseaux")|
-           (choix_utilisateur=="papier" & choix_ordi=="pierre")|
-           (choix_utilisateur=="ciseaux" & choix_ordi=="papier")){
-            return("Vous avez gagné")}
-    
-    else{
-      return("L'ordi a gagné")
-    
-    }else{
-      return("Choix inavlide")
-    }     
-        }
-    
-#Test de la fonction
-shifumi()
-      
-
-
-# Exercice 2 - Création des boucles
+#La fonction hist()
 
 #1
-resultat=0
-for (i in c(1,2,3,4,5)){
-  resultat=resultat+i
-  print(paste("le resultat est ",resultat))
-}
+hist(x=df$capacity,main="histogramme capacity")
 
 #2
-somme=0
-i=0
-while(somme<=50){
-  somme=somme+i
-  print(paste("la somme est ",somme,";i=",i))
-  i=i+1
-}
+hist(x=df$capacity,main="histogramme capacity",breaks = 6)
 
-#3 
-for(i in colnames(df)){
-  print(paste("la colone",i,"est de type ",class(df[,i])))
-}
+#3
+hist(x=df$capacity,main="histogramme capacity",breaks = 6,col="red")
 
 #4
-i=0
-while(i<=ncol(df)){
-  print(paste("la colone",i,"est de type ",class(df[,i])))  
-  i=i+1
-}
+hist(x=df$capacity,main="histogramme capacity",breaks = 6,col="red",xlab = "Capacity")
+
+#La fonction abline()
+#5
+abline(a=100,b=0,col="blue",lty=2)
+
+#Les fonctions hist(), lines() et density()
+
+#6  
+hist(x=df$capacity,main="Distribution de \n la capacité des stations",col="red",xlab = "Capacity",probability = TRUE)
+
+#7
+lines(density(df$capacity),  lty = 2,
+      col = "blue",
+      lwd = 4)
+
+#8
+hist(x=df$capacity,main="Distribution de \n la capacité des stations",col="red",xlab = "Capacity",probability = TRUE,ylim =  c(0,0.08))
+lines(density(df$capacity),  lty = 2,
+      col = "blue",
+      lwd = 4)
+
+#Exercice 3 - Le boxplot
+
+#1
+boxplot(x=df$capacity,main="Boxplot de \n la capacité des stations")
+
+#2
+boxplot(x=df$capacity,main="Boxplot de \n la capacité des stations",horizontal = TRUE)
+
+#3
+boxplot(x=df$capacity,main="Boxplot de \n la capacité des stations",horizontal = FALSE,outline = FALSE)
+
+#4
+points(mean(df$capacity),pch=15,col="red")
+
+#La fonction par()
+
+#5
+a=subset(df,CodePostal==69007)
+b=subset(df,CodePostal==69008)
+
+par(mfrow=c(1,2))
+df7=boxplot(x=a$bikes,main="vélos disponibles de le 7e", ylim = c(0,40))
+df8=boxplot(x=b$bikes,main="vélos disponibles de le 8e", ylim = c(0,40))
+
+#6
+par(1,1)
+boxplot(formula=bikes~bonus,data=df,main="répartition des vélos en fonction de bonus")
+
+#Les fonctions points() et tapply().
+
+#7
+means=tapply(X=df$bikes,INDEX = df$bonus,FUN=function(X)mean(X))
+print(means)
+points(means,pch=15,col="red")
+
+#Exercice 4 - Le diagramme
+
+#Les fonctions barplot() et table().
+#1
+effectif=table(df$bonus)
+barplot(height=effectif,main = "répartition station bonus")
+
+#2
+effectif=table(df$bonus)
+barplot(height=effectif,main = "répartition station bonus",horiz = TRUE)
+
+#Les fonctions barplot() ,prop.table() et legend().
+
+#3
+frequence = prop.table(effectif)
+barplot(height = frequence,
+        main = "Répartition en % du nombre \n de station bonus",
+        horiz = TRUE)
+
+#4
+effectif = table(df$banking, df$bonus)
+print(effectif)
+barplot(height = effectif,
+        main = "Bonus vs Banking",
+        xlab = "Station Bonus ?")
+#On remarque qu'on ne sait pas distinguer les deux modalités car il n'y a pas de légende.
+
+#5
+#Calcul des pourcentages
+frequence = prop.table(x = effectif)
+barplot(height = frequence,
+        main = "Bonus vs Banking",
+        xlab = "Station Bonus ?",
+        col = c("red","green"))
+
+#Préparer les labels
+legend_labels <- colnames(frequence)
+#Ajouter une légende
+legend(x = "topright", 
+       legend = legend_labels, 
+       fill  = c("red","green"))
+
+#Afficher les fréquences pour vérifier le graphique
+print(frequence)
+
+#6
+
+#Calcul des pourcentages colonnes
+frequence = prop.table(x = effectif, margin = 2)
+barplot(height = frequence,
+        main = "Bonus vs Banking",
+        xlab = "Station Bonus ?",
+        col = c("red","green"))
+
+#Préparer les labels
+legend_labels <- colnames(frequence)
+#Ajouter une légende
+legend(x = "topright", 
+       legend = legend_labels, 
+       fill  = c("red","green"))
+
+#Afficher les fréquences pour vérifier le graphique
+print(frequence)
+
+#7
+
+#Calcul des pourcentages colonnes
+frequence = prop.table(x = effectif, margin = 2)
+barplot(height = frequence,
+        main = "Bonus vs Banking",
+        xlab = "Station Bonus ?",
+        col = c("red","green"),
+        beside = TRUE)
+
+#Préparer les labels
+legend_labels <- colnames(frequence)
+#Ajouter une légende
+legend(x = "topright", 
+       legend = legend_labels, 
+       fill  = c("red","green"))
+
+#Afficher les fréquences pour vérifier le graphique
+print(frequence)
+
+#8
+pie(x = effectif,
+    main = "Répartition du nombre \n de station bonus",
+    col = c("yellow","green"))
+
+#9
+etiquette = paste(rownames(effectif),"\n",effectif)
+pie(x = effectif,
+    main = "Répartition du nombre \n de station bonus",
+    col = c("yellow","green"),
+    labels = etiquette)
+
+#10
+effectif=table(df$CodePostal)
+tri=sort(x=effectif,decreasing = TRUE)
+top10=tri[1:10]
+barplot(height = top10,las=2,col=palette())
+
+#11
+effectif=table(df$CodePostal)
+tri=sort(x=effectif,decreasing = TRUE)
+top10=tri[1:10]
+barplot(height = top10,las=2,col=colors())
+
+#12
+dev.print(device = png,file="graph.png",width=600)
+
+
+
+# Exercice 5 - Nuage de points
+
+#La fonction plot().
+
+#1
+plot(x = df$stands, y = df$capacity)
+
+#2
+plot(x=df$stands,y=df$capacity,xlim=c(0,60),ylim=c(0,60))
+
+#3
+df$bornes=as.factor(df$bornes)
+plot(x=df$stands,y=df$capacity,xlim=c(0,60),ylim=c(0,60),col=df$bornes,pch=19)
+legend(x="topright",legend = levels(df$bornes),col=palette(),pch=19)
+
+#4
+mycolors = c("red", "blue", "green")  
+df$bornes=as.factor(df$bornes)
+plot(x=df$stands,y=df$capacity,xlim=c(0,60),ylim=c(0,60),col=mycolors[df$bornes],pch=19)
+legend(x="topright",legend = levels(df$bornes),col=mycolors,pch=19)
+
+#5
+moy_stands=mean(df$stands)
+moy_capacity=mean(df$capacity)
+points(x=moy_stands,y=moy_capacity,pch=15,cex = 2,col="green")
+
+
+
