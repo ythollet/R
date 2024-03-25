@@ -194,3 +194,34 @@ shifumi=function(){
 #Test de la fonction
 shifumi()
       
+
+
+# Exercice 2 - Création des boucles
+
+#1
+resultat=0
+for (i in c(1,2,3,4,5)){
+  resultat=resultat+i
+  print(paste("le resultat est ",resultat))
+}
+
+#2
+somme=0
+i=0
+while(somme<=50){
+  somme=somme+i
+  print(paste("la somme est ",somme,";i=",i))
+  i=i+1
+}
+
+#3 
+for(i in colnames(df)){
+  print(paste("la colone",i,"est de type ",class(df[,i])))
+}
+
+#4
+i=0
+while(i<=ncol(df)){
+  print(paste("la colone",i,"est de type ",class(df[,i])))  
+  i=i+1
+}
