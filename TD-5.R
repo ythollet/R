@@ -137,5 +137,53 @@ proba_inf_200 = pnorm(q = 200, mean=moyenne_pop, sd=sd_pop)
 # Exercice 4 - Simulation d'échantillon
 
 #1
+a=sample(x=population,size = 100,replace=TRUE)
+mean(a)
+sd(a)
 
+#2
+largeur<-qnorm(p = 0.975,mean=0,sd=1)*sd_pop/sqrt(taille_ech)
+borne_inf<-moyenne_pop-largeur
+borne_sup <-moyenne_pop+largeur
 
+#3
+echantillons=replicate(n=1000,expr=sample(x=population,size=100,replace=TRUE))
+
+moyennes=apply(X=echantillons,MARGIN = 2,FUN = function(x)mean(x))
+ecart_types=apply(echantillons,MARGIN = 2, FUN = function(x) sd(x))
+
+#4
+hist(x=moyennes,main="moyennes")
+
+#5
+mean(moyennes)
+sd(moyennes)
+
+#6
+#observé
+moy172=moyennes[moyennes>172.8]  
+proportion=length(moy172)/length(moyennes)
+proportion
+
+#theorique
+proba_inf_172=pnorm(q=172.8,mean =171,sd=0.9)
+1-proba_inf_172
+
+#7
+largeur<-apply(X = echantillons,
+               MARGIN = 2,
+               FUN = function(x) pnorm(0.975)*sd(x)/100)
+
+borne_inf_IC<-moyennes-largeur
+borne_sup_IC<-moyennes+largeur
+
+#8
+moyenne_echantillon=function(V,n){
+  return(mean(sample(x=V,size = n,replace=TRUE)))
+}
+
+moyenne_echantillon(population,100)
+
+moyennes_20<-replicate(n = 1000, 
+                       expr = moyenne_echantillon(V = population,
+                                                  n = 20))
