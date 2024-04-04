@@ -1,5 +1,5 @@
-# Cours de programmation R 
+Cours de programmation R 
 
-# BUT Science des Données 1e année
+BUT Science des Données 1e année
 
-# Université Lumière Lyon II 
+Université Lumière Lyon II 
